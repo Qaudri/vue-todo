@@ -1,7 +1,7 @@
 <template>
   <div>
-    <PrimaryBtn button_text="Log in">Sign Up</PrimaryBtn>
-    <SecondaryBtn>Log in</SecondaryBtn>
+    <PrimaryBtn button_text="Log in"></PrimaryBtn>
+    <SecondaryBtn button_text="Sign Out"></SecondaryBtn>
 
   </div>
 </template>
