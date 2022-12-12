@@ -1,19 +1,26 @@
 <template>
-  <div>
-    <PrimaryBtn button_text="Log in"></PrimaryBtn>
-    <SecondaryBtn button_text="Sign Out"></SecondaryBtn>
-
+  <div class="pt-10">
+    <MenuBtn ></MenuBtn>
   </div>
 </template>
 
 <script>
 import PrimaryBtn from '../components/Ui/Buttons/Primary.vue';
 import SecondaryBtn from '../components/Ui/Buttons/Secondary.vue';
-
+import MenuBtn from '../components/Ui/Buttons/Menu.vue';
 export default {
+  data() {
+    return {
+      data_item: true
+    }
+  },
+
   components: {
-    PrimaryBtn, SecondaryBtn
-  }
+    PrimaryBtn, SecondaryBtn, MenuBtn
+  },
+
+  methods: {
+  },
 }
 </script>
 
