@@ -1,11 +1,11 @@
 <template>
-  <div class="pt-10">
-    <Logo></Logo>
+  <div class="bg-dark w-full h-screen">
+    <Header></Header>
   </div>
 </template>
 
 <script>
-
+import Header from '../components/Navigation/Header.vue';
 export default {
   data() {
     return {
@@ -15,6 +15,10 @@ export default {
 
   methods: {
   },
+
+  components: {
+    Header
+  }
 }
 </script>
 
