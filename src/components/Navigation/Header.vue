@@ -4,9 +4,9 @@
       <LogoIcon :white_logo="true"></LogoIcon>
     </div>
 
-    <MenuBtn></MenuBtn>
+    <MenuBtn @click="toggleMenu()"></MenuBtn>
 
-    <nav class="h-screen md:h-fit z-10 md:z-0 md:static bg-dark mdLbg-transparent w-full md:w-fit absolute left-0 top-36 md:top duration-500 ease-in-out translate-x-full md:translate-x-0">
+    <nav :class="menu_revealed ? 'translate-x-0' : 'translate-x-full'" class="h-screen md:h-fit z-10 md:z-0 md:static bg-dark mdLbg-transparent w-full md:w-fit absolute left-0 top-36 md:top duration-500 ease-in-out md:translate-x-0">
       
       <ul class="grid grid-cols-1 place-items-center gap-8 md:flex items-center md:gap-5">
         <li>
@@ -22,7 +22,7 @@
           <a class="text-white hover:text-primary duration-500 ease-in-out font-medium text-sm" href="#pricing">Pricing</a>
         </li>
         <li>
-          <PrimaryBtn>Sign Up</PrimaryBtn>
+          <PrimaryBtn @buttonClicked="this.$router.push({path: '/register'})">Sign Up</PrimaryBtn>
         </li>
       </ul>
     </nav>
@@ -36,7 +36,19 @@ import LogoIcon from '../Icons/Logo.vue'
 export default {
   components: {
     MenuBtn, LogoIcon
-  }
+  },
+
+  data() {
+    return {
+      menu_revealed: false
+    }
+  },
+
+  methods: {
+    toggleMenu(){
+      this.menu_revealed = !this.menu_revealed
+    }
+  },
 }
 </script>
 

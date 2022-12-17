@@ -45,10 +45,6 @@ export default {
 	props: {
 		white_logo: Boolean
 	},
-
-	created() {
-		console.log(this.white_logo)
-	},
 }
 </script>
 
