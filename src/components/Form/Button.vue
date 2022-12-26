@@ -7,21 +7,25 @@
       w-full
       justify-center
       flex
-      bg-accent2-700
-      hover:bg-accent2-600
-      text-white
+      bg-white
+      hover:bg-primary
+      text-dark
       font-medium
       text-base
       duration-500
       ease-in-out
       rounded-lg
-      active:bg-accent2-700
-      focus:bg-accent2-700
+      hover:text-white
+      active:text-white
+      focus:text-white
+      active:bg-primary
+      focus:bg-primary
     " 
+    :class="loading ? 'bg-primary text-white': ''"
     :disabled="loading || disabled"
   >
     <div class="flex items-center justify-center uppercase">
-      <div v-if="loading"  class="flex items-center">
+      <div v-if="loading"  class="flex items-center text-white">
         <div class=" mr-2">
           <svg class="w-6 h-6"
             xmlns="http://www.w3.org/2000/svg" 
