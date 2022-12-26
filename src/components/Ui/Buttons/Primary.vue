@@ -10,7 +10,6 @@
 export default {
   methods: {
     emitClicked(){
-
       this.$emit('buttonClicked')
     }
   },

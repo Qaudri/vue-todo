@@ -4,7 +4,7 @@
       <LogoIcon :white_logo="true"></LogoIcon>
     </div>
 
-    <MenuBtn @click="toggleMenu()"></MenuBtn>
+    <MenuBtn @buttonClicked="toggleMenu()"></MenuBtn>
 
     <nav :class="menu_revealed ? 'translate-x-0' : 'translate-x-full'" class="h-screen md:h-fit z-10 md:z-0 md:static bg-dark mdLbg-transparent w-full md:w-fit absolute left-0 top-36 md:top duration-500 ease-in-out md:translate-x-0">
       
