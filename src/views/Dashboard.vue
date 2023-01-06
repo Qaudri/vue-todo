@@ -1,5 +1,7 @@
 <template>
   <div class="bg-dark min-h-screen flex justify-center items-center">
+
+
     <div :class="delete_task_modal ? 'block': 'hidden'" class="w-full fixed z-20 bg-secondary bg-opacity-75 blurr items-center flex justify-center h-screen px-6 md:px-0 lg:px-10">
 
       <button @click="this.delete_task_modal = false">
@@ -39,6 +41,14 @@
 
         <Input label="Duration" type="text" placeholder="Enter task duration" :error="false" v-model:inputValue="form.duration"></Input>
 
+        <div>
+          <label class="block text-xs px-2 text-white mb-2">Category</label>
+          <select v-model="form.category" class="w-full py-2 px-4 text-sm outline-none bg-secondary text-white ring-0 focus:border-primary active:border-primary rounded-lg border border-transparent">
+            <option value="urgent">Urgent</option>
+            <option value="later">Later</option>
+          </select>
+        </div> 
+
         <PrimaryBtn class="w-full flex justify-center">Create Task</PrimaryBtn>
 
         <button class="text-white text-sm text-center hover:text-primary underline duration-500 ease-in-out mx-auto flex justify-center">Cancel</button>
@@ -47,7 +57,8 @@
 
     <div class="w-full md:w-2/3 grid gap-5">
       <PrimaryBtn class="flex justify-end" @buttonClicked="createTaskForm()">Create New Task</PrimaryBtn>
-      <Task v-for="item in 3" :key="item" @deleteTask="toggleDelete()" @markedAsComplete="toggleComplete()" :category="task_category"></Task>
+      <Task v-for="(item, index) in task_items" :index="index" :task="item" :key="item.id" :task_title="item.title" :task_duration="item.duration" @deleteTask="toggleDelete()" @markedAsComplete="taskCompleted()" :category="item.category"></Task>
+
     </div>
   </div>
 </template>
@@ -57,35 +68,61 @@ import Task from '../components/Todo/Index.vue'
 export default {
   data() {
     return {
-      task_category: '',
+      task_items: [
+      ],
       form: {
         title: '',
         description: '',
-        duration: ''
+        duration: '',
+        category: ''
       },
       create_task_form: false,
-      delete_task_modal: false
+      delete_task_modal: false,
+      selected_task: ''
     }
   },
 
   methods: {
     createTask(){
-      setTimeout(() => {
-        this.create_task_form = false
-      }, 2000);
+      let task_id = Math.floor(Math.random() * 100)
+      let task_info = {
+        id: task_id,
+        title: this.form.title,
+        description: this.form.description,
+        duration: this.form.duration,
+        category: this.form.category
+      }
+
+      this.task_items.push(task_info)
+      this.createTaskForm()
+      this.form.title = ''
+      this.form.description = ''
+      this.form.duration = ''
+      this.form.category = ''
+      localStorage.setItem('tasks', JSON.stringify(this.task_items))
+    },
+
+    taskCompleted(){
+      localStorage.setItem('tasks', JSON.stringify(this.task_items))
     },
 
     createTaskForm(){
-      this.create_task_form = true
-    },
-
-    toggleComplete(){
-      this.task_category = 'completed'
+      this.create_task_form = !this.create_task_form
     },
 
     toggleDelete(){
-      this.delete_task_modal = true
+      this.delete_task_modal = !this.delete_task_modal
+    },
+
+    deleteTask(task){
+      this.task_items.splice(task, 1)
+      this.toggleDelete()
+      localStorage.setItem('tasks', JSON.stringify(this.task_items))
     }
+  },
+
+  created() {
+    this.task_items = JSON.parse(localStorage.getItem('tasks'))
   },
 
   components: {
